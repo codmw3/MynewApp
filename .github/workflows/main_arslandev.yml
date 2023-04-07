@@ -101,7 +101,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          #name: .net-app
+          name: .net-app
           creds: ${{ secrets.MY_CRED }}
 
       - name: Deploy to Azure Web App
@@ -123,7 +123,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          #name: .net-app
+          name: .net-app
           creds: ${{ secrets.MY_CRED }}
 
       - name: Deploy to Azure Web App
