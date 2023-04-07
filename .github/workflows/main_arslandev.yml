@@ -3,6 +3,11 @@
 
 name: Build and deploy ASP.Net Core app to Azure Web App - arslandev
 
+env:
+  AZURE_WEBAPP_NAME: arslandev    # set this to the name of your Azure Web App
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '6.0.*'
+
 on:
   push:
     branches:
@@ -10,7 +15,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build_DEV:
     runs-on: windows-latest
 
     steps:
@@ -36,18 +41,19 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
-  deploy:
+  deploy_DEV:
     runs-on: windows-latest
-    needs: build
+    needs: build_DEV
     environment:
-      name: 'Production'
+      name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: .net-app
+          #name: .net-app
+          creds: ${{ secrets.MY_CRED }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -57,3 +63,96 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
           package: .
+build_TST:
+    runs-on: windows-latest
+    needs: deploy_DEV
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          include-prerelease: true
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+        working-directory: "./AzureApp"
+
+      - name: dotnet publish
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        working-directory: "./AzureApp"
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+
+deploy_TST:
+    runs-on: windows-latest
+    needs: build_TST
+    environment:
+      name: 'Test'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          #name: .net-app
+          creds: ${{ secrets.MY_CRED }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'arslandev'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.SADAF_PUBLISH }}
+          package: .
+deploy_STG:
+    runs-on: windows-latest
+    needs: deploy_TST
+    environment:
+      name: 'Staging'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          #name: .net-app
+          creds: ${{ secrets.MY_CRED }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'arslandev'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.SADAF_PUBLISH }}
+          package: .
+# deploy_PRD:
+#     runs-on: windows-latest
+#     needs: build_DEV
+#     environment:
+#       name: 'Development'
+#       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+#     steps:
+#       - name: Download artifact from build job
+#         uses: actions/download-artifact@v2
+#         with:
+#           #name: .net-app
+#           creds: ${{ secrets.MY_CRED }}
+
+#       - name: Deploy to Azure Web App
+#         id: deploy-to-webapp
+#         uses: azure/webapps-deploy@v2
+#         with:
+#           app-name: 'arslandev'
+#           slot-name: 'Production'
+#           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
+#           package: .
