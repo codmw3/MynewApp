@@ -52,7 +52,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          #name: .net-app
+          name: .net-app
           creds: ${{ secrets.MY_CRED }}
 
       - name: Deploy to Azure Web App
@@ -63,7 +63,7 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
           package: .
-build_TST:
+  build_TST:
     runs-on: windows-latest
     needs: deploy_DEV
 
