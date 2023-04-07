@@ -90,7 +90,7 @@ build_TST:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
-deploy_TST:
+  deploy_TST:
     runs-on: windows-latest
     needs: build_TST
     environment:
@@ -112,7 +112,7 @@ deploy_TST:
           slot-name: 'Production'
           publish-profile: ${{ secrets.SADAF_PUBLISH }}
           package: .
-deploy_STG:
+  deploy_STG:
     runs-on: windows-latest
     needs: deploy_TST
     environment:
