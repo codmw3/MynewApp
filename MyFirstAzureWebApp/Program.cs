@@ -7,8 +7,8 @@ var isDevelopment = builder.Environment.IsDevelopment();
 string environmentName = null;
 #if DEBUG
 environmentName = "Development";
-#elif RELEASE
-environmentName = "Development";
+// #elif RELEASE
+// environmentName = "Development";
 #elif TESTING
 environmentName = "Testing";
 #elif STAGING 
