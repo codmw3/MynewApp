@@ -106,7 +106,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-           app-name: 'sadafnew'
+           app-name: 'arslandev'
            slot-name: 'Production'
           publish-profile: ${{ secrets.SADAF_PUBLISH }}
           package: .
@@ -125,12 +125,12 @@ jobs:
         with:
           name: .net-app
 
-          
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-           app-name: 'sulaiman'
+           app-name: 'arslandev'
            slot-name: 'Production'
           publish-profile: ${{ secrets.SULMAN_PUBLISH }}
           package: .
