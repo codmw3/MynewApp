@@ -10,7 +10,7 @@ environmentName = "Development";
 #elif RELEASE
 environmentName = "Testing";
 #elif TESTING
-environmentName = "Testing";
+environmentName = "Development";
 #elif STAGING 
 environmentName = "Staging";
 #else
