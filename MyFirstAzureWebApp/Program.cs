@@ -5,10 +5,10 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
 var isDevelopment = builder.Environment.IsDevelopment();
 
 string environmentName = null;
-#if DEBUG
-environmentName = "Development";
-// #elif RELEASE
+// #if DEBUG
 // environmentName = "Development";
+#if RELEASE
+environmentName = "Development";
 #elif TESTING
 environmentName = "Testing";
 #elif STAGING 
