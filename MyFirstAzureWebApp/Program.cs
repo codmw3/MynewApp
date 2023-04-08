@@ -8,7 +8,7 @@ string environmentName = null;
 #if DEBUG
 environmentName = "Development";
 #elif RELEASE
-environmentName = "Testing";
+environmentName = "Development";
 #elif TESTING
 environmentName = "Testing";
 #elif STAGING 
