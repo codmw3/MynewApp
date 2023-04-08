@@ -5,7 +5,7 @@ new devops project
 
 # steps to execute
 Creation of new project
-git pull/push request
+git pull/push requests
 
 vs code
 branching
