@@ -20,7 +20,7 @@
 name: Build and deploy ASP.Net Core app to an Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: mywebappdevopssp23    # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME: arslandev    # set this to the name of your Azure Web App
   # AZURE_WEBAPP_NAME_TST: testwebappdevopsmsse
   # AZURE_WEBAPP_NAME_STG: stagingwebappdevopsmsse
   # AZURE_WEBAPP_NAME_PROD: productiondevopsmsse
@@ -91,14 +91,14 @@ jobs:
       - name: Login job
         uses: azure/login@v1
         with:
-           creds: ${{ secrets.MYTSUM_AZURE }}
+           creds: ${{ secrets.MY_CRED }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.MYSTUM_PUBLISH }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
   
   build_TST:
@@ -156,14 +156,14 @@ jobs:
       - name: Login job
         uses: azure/login@v1
         with:
-           creds: ${{ secrets.BEENISH_AZURE }}
+           creds: ${{ secrets.MY_CRED }}
           
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME_TST }}
-          publish-profile: ${{ secrets.BEENISH_PUBLISH }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
   
   build_STG:
@@ -221,14 +221,14 @@ jobs:
       - name: Login job
         uses: azure/login@v1
         with:
-           creds: ${{ secrets.TAYYAB_AZURE }}
+           creds: ${{ secrets.MY_CRED }}
           
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME_STG }}
-          publish-profile: ${{ secrets.TAYYAB_PUBLISH }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
   
   build_PROD:
@@ -286,12 +286,12 @@ jobs:
       - name: Login job
         uses: azure/login@v1
         with:
-           creds: ${{ secrets.MAHNOOR_AZURE }}
+           creds: ${{ secrets.MY_CRED }}
           
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME_PROD }}
-          publish-profile: ${{ secrets.MAHNOOR_PUBLISH }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
