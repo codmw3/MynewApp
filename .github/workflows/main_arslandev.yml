@@ -60,7 +60,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'arslandev'
-          slot-name: 'Production'
+          # slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
           package: .
   build_TST:
@@ -108,10 +108,12 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'arslandev'
-          slot-name: 'Production'
+           app-name: 'sadafnew'
+          # slot-name: 'Production'
           publish-profile: ${{ secrets.SADAF_PUBLISH }}
           package: .
+  
+  
   deploy_STG:
     runs-on: windows-latest
     needs: deploy_TST
@@ -130,9 +132,9 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'arslandev'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.SADAF_PUBLISH }}
+           app-name: 'sulaiman'
+          # slot-name: 'Production'
+          publish-profile: ${{ secrets.SULMAN_PUBLISH }}
           package: .
 # deploy_PRD:
 #     runs-on: windows-latest
