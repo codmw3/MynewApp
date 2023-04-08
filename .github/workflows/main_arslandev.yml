@@ -20,8 +20,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Set up .NET Core
+        name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
@@ -69,8 +68,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Set up .NET Core
+        name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
@@ -113,7 +111,7 @@ jobs:
           publish-profile: ${{ secrets.SADAF_PUBLISH }}
           package: .
   
-  
+
   deploy_STG:
     runs-on: windows-latest
     needs: deploy_TST
@@ -126,8 +124,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: .net-app
-          
 
+          
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
