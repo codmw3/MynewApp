@@ -98,7 +98,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
+          publish-profile: ${{ secrets.MY_CRED_PUBLISH }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
   
   build_TST:
@@ -163,7 +163,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
+          publish-profile: ${{ secrets.MY_CRED_PUBLISH }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
   
   build_STG:
@@ -228,7 +228,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
+          publish-profile: ${{ secrets.MY_CRED_PUBLISH }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
   
   build_PROD:
@@ -293,5 +293,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4DDF9FCAAF3144BEA3878012BC9BCBB5 }}
+          publish-profile: ${{ secrets.MY_CRED_PUBLISH }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
