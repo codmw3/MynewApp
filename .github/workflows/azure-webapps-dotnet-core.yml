@@ -144,7 +144,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_TST
     environment:
-      name: 'Test'
+      name: 'Testing'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
