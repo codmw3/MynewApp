@@ -19,6 +19,8 @@ environmentName = "Production";
 
 var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "D";
 
+Console.WriteLine($"appsettings.{environmentName}.json");
+
 
 builder.Configuration.AddJsonFile($"appsettings.{environmentName}.json", optional: true);
 builder.Configuration.AddEnvironmentVariables();
