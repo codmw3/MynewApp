@@ -18,7 +18,7 @@ environmentName = "Production";
 #endif
 
 var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "D";
-
+//To check
 Console.WriteLine($"appsettings.{environmentName}.json");
 
 
