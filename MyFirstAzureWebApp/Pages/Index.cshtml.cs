@@ -41,6 +41,13 @@ public class IndexModel : PageModel
         int c = a + b;
         return c;
     }
+    /*
+     public int Add(int a, int b)
+    {
+        int c = a + b;
+        return c;
+    }
+    */
     private void CallTest()
     {
         if (env_index == "Test")
